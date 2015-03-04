@@ -55,3 +55,6 @@ gem 'activeadmin', github: 'activeadmin'
 
 # For user permissions, abilities
 gem 'cancancan', '~> 1.10'
+
+# Paypal & other payment gateways
+gem 'activemerchant'

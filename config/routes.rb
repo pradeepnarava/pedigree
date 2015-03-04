@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources :payments
+  post 'payments/redirect_to_paypal'
+
   devise_for :patients
   resources :patients
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228135444) do
+ActiveRecord::Schema.define(version: 20150304073512) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(version: 20150228135444) do
 
   add_index "patients", ["email"], name: "index_patients_on_email", unique: true, using: :btree
   add_index "patients", ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true, using: :btree
+
+  create_table "payments", force: true do |t|
+    t.string   "token"
+    t.string   "payer_id"
+    t.float    "amount",     limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rapidfire_answer_groups", force: true do |t|
     t.integer  "question_group_id"

@@ -79,7 +79,7 @@ class PaymentsController < ApplicationController
         sra: 1  # Reattempt When fails
     }
 
-    redirect_to "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
+    redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
     # render :nothing=>true
   end
 

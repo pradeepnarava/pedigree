@@ -63,7 +63,7 @@ class PaymentsController < ApplicationController
 
   def redirect_to_paypal
     values = {
-        business: "namanipradeepkumar-facilitator@gmail.com",
+        business: "merchant.brilliancetech@gmail.com",
         upload: 1,
         no_shipping: 1,
         return: "#{Rails.application.secrets.app_host}/payments",

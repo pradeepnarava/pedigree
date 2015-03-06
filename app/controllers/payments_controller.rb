@@ -63,34 +63,21 @@ class PaymentsController < ApplicationController
 
   def redirect_to_paypal
     values = {
-        business: "business.brilliancetech@gmail.com",
+        business: "kumar.brilliancetech@gmail.com",
         upload: 1,
         no_shipping: 1,
-        return: "#{Rails.application.secrets.app_host}/",
-        notify_url: "#{Rails.application.secrets.app_host}/",
+        return: "#{Rails.application.secrets.app_host}/payments",
+        notify_url: "#{Rails.application.secrets.app_host}/payments",
         invoice: 100,
         item_name: "Membership",
-        cmd: "_xclick",
-        amount: 10,
-        item_number: 10,
-        quantity: '1'
+        cmd: "_xclick-subscriptions",
+        a3: params['amount'],
+        p3: 1,  # For 1 Month
+        # srt: course.cycles,
+        t3: "M",  # Monthly
+        src: 1, # To Recurring
+        sra: 1  # Reattempt When fails
     }
-    # values = if course.recurring
-    #            values.merge(
-    #                cmd: "_xclick-subscriptions",
-    #                a3: course.price,
-    #                p3: 1,
-    #                srt: course.cycles,
-    #                t3: course.period.first
-    #            )
-    #          else
-    #            values.merge(
-    #                cmd: "_xclick",
-    #                amount: course.price,
-    #                item_number: course.id,
-    #                quantity: '1'
-    #            )
-    #          end
 
     redirect_to "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
     # render :nothing=>true

@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'patient/family_tree'
+
   resources :payments
   post 'payments/redirect_to_paypal'
-
-  devise_for :patients
-  resources :patients
-
-  # devise_for :users
 
   devise_for :users do
     get '/users/sign_out' => 'devise/sessions#destroy'

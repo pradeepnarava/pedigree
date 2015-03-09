@@ -59,3 +59,12 @@ gem 'cancancan', '~> 1.10'
 
 # Paypal & other payment gateways
 gem 'activemerchant'
+
+# For PDF Generation
+gem 'wicked_pdf'
+
+# Dependant gem for wiked_pdf
+gem 'wkhtmltopdf-binary'
+
+# For generating Family Tree
+gem 'genealogy'

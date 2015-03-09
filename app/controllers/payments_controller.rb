@@ -68,7 +68,7 @@ class PaymentsController < ApplicationController
         no_shipping: 1,
         return: "#{Rails.application.secrets.app_host}/payments",
         notify_url: "#{Rails.application.secrets.app_host}/payments",
-        invoice: 100,
+        invoice: rand(1..100),
         item_name: "Membership",
         cmd: "_xclick-subscriptions",
         a3: params['amount'],

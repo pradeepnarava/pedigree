@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
+  get 'patient/destroy' => 'patient#destroy' , :as => 'patient_destroys'
+  get 'patient/destroy/:id(.:format)' => 'patient#destroy', :as => 'patient_destroy'
+
   get 'patient/family_tree'
 
-  resources :payments
+  resources :patient
   post 'payments/redirect_to_paypal'
 
   devise_for :users do

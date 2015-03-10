@@ -23,9 +23,15 @@
   </head>
   <body class="container">
     <% if current_user %>
-      <a href="/rapidfire">Home</a>
-      <a href="/patient/family_tree">Family Tree</a>
-		  <a href="/users/sign_out" class="pull-right">Sign out</a>
+      <ul class="nav nav-pills">
+        <li><a href="/rapidfire">Home</a></li>
+        <% if can? :create, User %>
+          <li><a href="/patient/">Patients</a></li>
+        <% end %>
+        <li><a href="/patient/family_tree">Family Tree</a></li>
+      </ul>
+
+      <a href="/users/sign_out" class="pull-right">Sign out</a>
 	  <% end %>
 	  <%= yield %>
   </body>

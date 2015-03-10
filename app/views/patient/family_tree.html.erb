@@ -2,6 +2,11 @@
 We will create a family tree using just CSS(3)
 The markup will be simple nested lists
 -->
+
+<% content_for :header do -%>
+  <%= stylesheet_link_tag 'family_tree', media: 'all', 'data-turbolinks-track' => true %>
+<% end -%>
+
 <div class="tree">
 	<ul>
 		<li>
@@ -32,8 +37,3 @@ The markup will be simple nested lists
 		</li>
 	</ul>
 </div>
-
-
-<%= content_for :header do %>
-	<%=stylesheet_link_tag "family_tree" %>
-<% end %>

@@ -76,7 +76,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         sra: 1  # Reattempt When fails
     }
 
-    return "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
+    # return "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
+    return "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
     # super(resource)
   end
 

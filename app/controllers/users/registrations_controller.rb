@@ -61,7 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up.
   def after_sign_up_path_for(resource)
     values = {
-        business: "merchant.brilliancetech@gmail.com",
+        business: "business.brilliancetech@gmail.com",
         upload: 1,
         no_shipping: 1,
         # return: "#{Rails.application.secrets.app_host}/payments",

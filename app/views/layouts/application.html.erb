@@ -29,10 +29,18 @@
           <li><a href="/patient/">Patients</a></li>
         <% end %>
         <li><a href="/patient/family_tree">Family Tree</a></li>
+        <li><a href="/pages/send_questionaire">Send Questionaire</a></li>
       </ul>
 
       <a href="/users/sign_out" class="pull-right">Sign out</a>
 	  <% end %>
+    <% unless flash[:notice].blank? %>
+      <%= flash[:notice] %>
+    <% end %>
+    <% unless flash[:notice].blank? %>
+      <%= flash[:error] %>
+    <%end %>
+    
 	  <%= yield %>
   </body>
 </html>

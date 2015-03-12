@@ -14,7 +14,15 @@ class ApplicationController < ActionController::Base
 	end
 
 	def after_sign_in_path_for(resource_or_scope)
-      	rapidfire_path
+		if admin_user_signed_in?
+			admin_dashboard_path
+		else
+			if current_user.payment_status == 1
+				rapidfire_path	
+			else
+				destroy_user_session_path
+			end			
+      	end
 	end
 
 	# def after_sign_out_path_for(resource_or_scope)

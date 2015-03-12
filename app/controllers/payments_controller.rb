@@ -4,7 +4,9 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
+    # @payments = Payment.all
+    flash[:notice] = "Payment has been done successfully."
+    redirect_to rapidfire_path
   end
 
   # GET /payments/1
@@ -23,18 +25,37 @@ class PaymentsController < ApplicationController
 
   # POST /payments
   # POST /payments.json
+  protect_from_forgery except: [:create]
   def create
-    @payment = Payment.new(payment_params)
+    params.permit! # Permit all Paypal input params
 
-    respond_to do |format|
-      if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
-        format.json { render :show, status: :created, location: @payment }
+    @user = User.find(params[:invoice].to_i)
+
+    if params[:txn_type] == 'subscr_payment'
+      status = params[:payment_status]
+
+      if status == "Completed"
+        @payment = Payment.new(:transaction_id => params[:txn_id], :payer_id => params[:payer_id], :amount => params[:payment_gross] ,:user_id=> params[:invoice])
+        @payment.save
+        @user.update_attributes(:payment_status => 1)
       else
-        format.html { render :new }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
+        @user.destroy
       end
     end
+
+    render nothing: true   
+
+    # @payment = Payment.new(payment_params)
+
+    # respond_to do |format|
+    #   if @payment.save
+    #     format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+    #     format.json { render :show, status: :created, location: @payment }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @payment.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /payments/1
@@ -61,27 +82,25 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def redirect_to_paypal
-    values = {
-        business: "merchant.brilliancetech@gmail.com",
-        upload: 1,
-        no_shipping: 1,
-        return: "#{Rails.application.secrets.app_host}/payments",
-        notify_url: "#{Rails.application.secrets.app_host}/payments",
-        invoice: rand(1..100),
-        item_name: "Membership",
-        cmd: "_xclick-subscriptions",
-        a3: params['amount'],
-        p3: 1,  # For 1 Month
-        # srt: course.cycles,
-        t3: "M",  # Monthly
-        src: 1, # To Recurring
-        sra: 1  # Reattempt When fails
-    }
+  # def redirect_to_paypal
+  #   values = {
+  #       business: "merchant.brilliancetech@gmail.com",
+  #       upload: 1,
+  #       no_shipping: 1,
+  #       return: "#{Rails.application.secrets.app_host}/payments",
+  #       notify_url: "#{Rails.application.secrets.app_host}/payments",
+  #       invoice: rand(1..100),
+  #       item_name: "Membership",
+  #       cmd: "_xclick-subscriptions",
+  #       a3: params['amount'],
+  #       p3: 1,  # For 1 Month
+  #       t3: "M",  # Monthly
+  #       src: 1, # To Recurring
+  #       sra: 1  # Reattempt When fails
+  #   }
 
-    redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
-    # render :nothing=>true
-  end
+  #   redirect_to "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

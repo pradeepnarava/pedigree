@@ -1,0 +1,21 @@
+<h1>Listing memberships</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Fee amount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @memberships.each do |membership| %>
+      <tr>
+        <td><%= membership.name %></td>
+        <td><%= membership.fee_amount %></td>
+        <td><%= link_to "Signup","/users/sign_up/?id=#{membership.id}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

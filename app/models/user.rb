@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   belongs_to :clinic, :class_name => "User"
   has_many :patients, :class_name => "User"
+  belongs_to :membership
+  has_many :payments
 end

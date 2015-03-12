@@ -1,27 +1,3 @@
-<br/><br/>
-<div class="row">
-  <div class="col-md-2">
-    <%= form_tag('/payments/redirect_to_paypal',method: :post) do %>
-      <%= hidden_field_tag 'amount','10' %>
-      <%= submit_tag "Bronze ( $10 )"%>
-    <% end %>
-  </div>
-
-  <div class="col-md-2">
-    <%= form_tag('/payments/redirect_to_paypal',method: :post) do %>
-      <%= hidden_field_tag 'amount','20' %>
-      <%= submit_tag "Silver ( $20 )"%>
-    <% end %>
-  </div>
-
-  <div class="col-md-2">
-    <%= form_tag('/payments/redirect_to_paypal',method: :post) do %>
-      <%= hidden_field_tag 'amount','30' %>
-      <%= submit_tag "Gold ( $30 )"%>
-    <% end %>
-  </div>
-</div>
-
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -44,6 +20,8 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
+  <%= f.hidden_field :membership_id, :value=>params['id'] %>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

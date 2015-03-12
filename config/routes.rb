@@ -1,14 +1,25 @@
 Rails.application.routes.draw do
   
+  resources :memberships
+
+  get 'pages/membership_not_paid'
+  get 'pages/send_questionaire'
+  post 'pages/email_questionaire'
+  get 'pages/generate_pedigree'
+
   get 'patient/destroy' => 'patient#destroy' , :as => 'patient_destroys'
   get 'patient/destroy/:id(.:format)' => 'patient#destroy', :as => 'patient_destroy'
 
   get 'patient/family_tree'
 
   resources :patient
+  resources :payments
   post 'payments/redirect_to_paypal'
 
-  devise_for :users do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    :registrations => "users/registrations"
+  } do 
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 

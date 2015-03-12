@@ -1,7 +1,5 @@
 <h1>Results</h1>
 
-<%= link_to "Generate Pedigree", "/pages/generate_pedigree?id=#{params[:id]}", html_options = { :class=> "pull-right btn btn-success", :target => "_blank"} %>
-
 <%- @question_group_results.each do |result| %>
   <div>
     <h4><%= result.question.question_text %></h4>

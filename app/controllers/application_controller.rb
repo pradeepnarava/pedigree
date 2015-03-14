@@ -17,11 +17,15 @@ class ApplicationController < ActionController::Base
 		if admin_user_signed_in?
 			admin_dashboard_path
 		else
-			if current_user.payment_status == 1
-				rapidfire_path	
-			else
-				destroy_user_session_path
-			end			
+			if current_user.role == 'clinic'
+				if current_user.payment_status == 1
+					rapidfire_path	
+				else
+					destroy_user_session_path
+				end
+			elsif current_user.role == 'patient'
+				rapidfire_path
+			end						
       	end
 	end
 

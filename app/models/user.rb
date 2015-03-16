@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_many :patients, :class_name => "User"
   belongs_to :membership
   has_many :payments
+  has_many :user_relations
 end

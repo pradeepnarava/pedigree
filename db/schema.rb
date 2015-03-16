@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312103442) do
+ActiveRecord::Schema.define(version: 20150316103456) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 20150312103442) do
   end
 
   add_index "rapidfire_questions", ["question_group_id"], name: "index_rapidfire_questions_on_question_group_id", using: :btree
+
+  create_table "user_relations", force: true do |t|
+    t.string   "name"
+    t.string   "sex"
+    t.integer  "father_id"
+    t.integer  "mother_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",       null: false

@@ -1,0 +1,17 @@
+<p>
+  <strong>Name:</strong>
+  <%= @user_relation.name %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @user_relation.sex %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_relation.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_user_relation_path(@user_relation) %> |
+<%= link_to 'Back', user_relations_path %>

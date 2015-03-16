@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :user_relations
+
   resources :memberships
 
   get 'pages/membership_not_paid'

@@ -1,0 +1,42 @@
+<%= form_for(@user_relation) do |f| %>
+  <% if @user_relation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_relation.errors.count, "error") %> prohibited this user_relation from being saved:</h2>
+
+      <ul>
+      <% @user_relation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    To Which family member do you want to add a relative?<br>
+    <% if @family_members.blank? %>
+      <%= select_tag "to_family_member", options_for_select([ "Self" ]) %>
+    <% else %>
+      <%= select_tag "to_family_member", options_from_collection_for_select(@family_members, "id", "name") %>
+    <% end %>
+  </div>
+
+  <% unless @family_members.blank? %>
+    <div class="field">
+      What relative do you want to add to yourself?<br>
+      <%= select_tag "what_relative", options_for_select(["Father", "Mother", "Child" ]) %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :sex %><br>
+    <%= f.select(:sex,options_for_select([["Male", "M"], ["Female", "F"]]))  %>
+  </div>
+  <%= f.hidden_field :user_id, :value=>current_user.id %>
+  <div class="actions">
+    <%= f.submit "Create Family Member" %>
+  </div>
+<% end %>

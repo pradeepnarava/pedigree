@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use mysql2 as the database for Active Record
@@ -67,4 +66,5 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 # For generating Family Tree
-gem 'genealogy'
+gem 'genealogy', '~> 1.5.0'
+# gem 'genealogy'

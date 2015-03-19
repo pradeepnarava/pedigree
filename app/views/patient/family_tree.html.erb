@@ -7,33 +7,46 @@ The markup will be simple nested lists
   <%= stylesheet_link_tag 'family_tree', media: 'all', 'data-turbolinks-track' => true %>
 <% end -%>
 
+<!-- Dynamic Family tree end -->
+
 <div class="tree">
-	<ul>
-		<li>
-			<a href="#">Parent</a>
-			<ul>
-				<li>
-					<a href="#">Child</a>
-					<ul>
-						<li>
-							<a href="#">Grand Child</a>
+	
+	<% @j = 0 %>
+	<% @family_members.each do |family_member| %>
+		<% if @i == 1 %>
+			<% @i = 2 %>
+			<% @j = @j + 1 %>
+			<% next %>
+		<% end %>
+		<ul>
+			<li>
+				<a><%= family_member.name %></a>
+				<% if family_member.current_spouse %>
+					<% @i = 1 %>
+					<li>
+						<a href="#"><%= family_member.current_spouse.name %></a>
+					<%unless family_member.current_spouse.children %>
 						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">Child</a>
-					<ul>
-						<li><a href="#">Grand Child</a></li>
-						<li>
-							<a href="#">Grand Child</a>
-							<ul>
-								<li><a href="#">Great Grand Child</a></li>
-							</ul>
-						</li>
-						<li><a href="#">Grand Child</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
+					<% end %>
+				<% end %>
+	<% end %>
+
+	<% @family_members.each do |family_member| %>
+			<%if family_member.current_spouse %>
+				<%if family_member.current_spouse.father %>
+					</li>
+				<% end %>
+			<% end %>
+			<% if @j != 0 %>
+				<% @j = @j - 1 %>
+				<% next	%>				
+			<% end %>
+			</li>
+		</ul>
+	<% end %>
+
+</div>
+<br/>
+<div class="col-md-12">
+	<%=link_to "Finish", root_path, :class=>"pull-right btn btn-default" %>
 </div>

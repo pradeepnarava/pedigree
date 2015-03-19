@@ -3,6 +3,23 @@ class PatientController < ApplicationController
   
   def family_tree
 
+    @self_member = current_user.user_relations.first
+
+    @family_members = @self_member.ancestors.reverse
+
+    # @family_members.reverse_merge!(@self_member.current_spouse)
+    @self_family = Array(@self_member)
+
+    if @self_member.current_spouse
+      @self_family.push(@self_member.current_spouse)
+    end    
+
+    @descendants = @self_member.descendants
+
+    @family_members = @family_members + @self_family
+
+    @family_members = @family_members + @descendants
+
   end
 
   # Listing all patients under clinic

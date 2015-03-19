@@ -29,16 +29,22 @@ class UserRelationsController < ApplicationController
 
     unless params[:to_family_member] == "Self"
 
-      @self_user = current_user.user_relations.first
+      @self_user = UserRelation.find(params[:to_family_member])
 
       case params[:what_relative]
 
         when "Father"
           @self_user.add_father(@user_relation) # Adding Father
+          unless @self_user.mother.nil?
+            @user_relation.add_current_spouse(@self_user.mother) # Adding Spouse
+          end
         when "Mother"
           @self_user.add_mother(@user_relation) # Adding Mother
+          unless @self_user.father.nil?
+            @user_relation.add_current_spouse(@self_user.father) # Adding Spouse
+          end
         when "Child"
-          @self_user.add_child(@user_relation) # Adding Childrens
+          @self_user.add_child(@user_relation) # Adding Childrens          
 
       end
 
@@ -48,7 +54,7 @@ class UserRelationsController < ApplicationController
       # @self_user.add_paternal_grandmother(@user_relation) # Adding Paternal Grandmother
       # @self_user.add_maternal_grandfather(@user_relation) # Adding Maternal Grandfather
       # @self_user.add_maternal_grandmother(@user_relation) # Adding Maternal Grandmother
-      # @self_user.add_spouse(@user_relation) # Adding Spouse
+      # @self_user.add_current_spouse(@user_relation) # Adding Spouse
     
     end
 
@@ -63,7 +69,7 @@ class UserRelationsController < ApplicationController
     end
   rescue => e
     @family_members = current_user.user_relations
-    flash[:notice] = "The internet broke. Error : #{e}"
+    flash[:notice] = "The internal broke. Error : #{e}"
     respond_to do |format|
       format.html { redirect_to new_user_relation_path }
     end

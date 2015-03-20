@@ -30,7 +30,6 @@ class PatientController < ApplicationController
   # Listing all patients under clinic
   def index
   	@patients = current_user.patients
-
   end
 
   # Initiating New Patient

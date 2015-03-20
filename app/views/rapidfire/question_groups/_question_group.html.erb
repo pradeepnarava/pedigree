@@ -8,11 +8,12 @@
   </td>
   <td>
     <ul class="horizontal-list">
-      <li><%= link_to "Answer Questions", new_question_group_answer_group_path(question_group) %></li>
-      <% if can_administer? %>
-        <li><%= link_to "Results", [:results, question_group] %></li>
-        <li><%= link_to "Delete", [question_group], method: :delete %></li>
-      <% end %>
+      <li><%= request.original_url%>/question_groups/<%=question_group.id%>/answer_groups/new
+      <%#= link_to "Answer Questions", new_question_group_answer_group_path(question_group) %></li>
+      <%# if can_administer? %>
+        <!-- <li><%= link_to "Results", [:results, question_group] %></li>
+        <li><%= link_to "Delete", [question_group], method: :delete %></li>-->
+      <%# end %>
     </ul>
   </td>
 </tr>

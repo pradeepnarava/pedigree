@@ -22,11 +22,11 @@ The markup will be simple nested lists
 			<% end %>
 			<ul>
 				<li>
-					<a class="rectangle"><%= family_member.name %></a>
+					<a class=<%= family_member.is_male? ? 'rectangle' : 'circle' %>><%= family_member.name %></a>
 					<% if family_member.current_spouse %>
 						<% @i = @i + 1 %>
 						<li>
-							<a href="#" class="rectangle"><%= family_member.current_spouse.name %></a>
+							<a href="#" class=<%= family_member.current_spouse.is_male? ? 'rectangle' : 'circle' %>><%= family_member.current_spouse.name %></a>
 						<%unless family_member.current_spouse.children %>
 							</li>
 						<% end %>
@@ -36,7 +36,7 @@ The markup will be simple nested lists
 						<% family_member.siblings.each do |fsibling| %>
 							<% @i = @i + 1 %>
 							<li>
-								<a href="#" class="rectangle"><%= fsibling.name %></a>
+								<a href="#" class=<%= fsibling.is_male? ? 'rectangle' : 'circle' %>><%= fsibling.name %></a>
 							</li>
 						<% end %>
 					<% end %>

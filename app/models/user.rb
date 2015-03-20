@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
   belongs_to :membership
   has_many :payments
   has_many :user_relations
+  has_many :rapidfire_answer_groups, :class_name => "Rapidfire::AnswerGroup"
 end

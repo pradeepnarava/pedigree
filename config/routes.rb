@@ -11,8 +11,10 @@ Rails.application.routes.draw do
 
   get 'patient/destroy' => 'patient#destroy' , :as => 'patient_destroys'
   get 'patient/destroy/:id(.:format)' => 'patient#destroy', :as => 'patient_destroy'
-
-  get 'patient/family_tree'
+  get 'patient/family_tree' => 'patient#family_tree' , :as => 'patient_family_trees'
+  get 'patient/family_tree/:id(.:format)' => 'patient#family_tree' , :as => 'patient_family_tree'
+  get 'patient/survey_answers' => 'patient#survey_answers', :as => 'patient_survey_answerss'
+  get 'patient/survey_answers/:id(.:format)' => 'patient#survey_answers', :as => 'patient_survey_answers'
 
   resources :patient
   resources :payments

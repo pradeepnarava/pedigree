@@ -4,7 +4,7 @@ class UserRelationsController < ApplicationController
   # GET /user_relations
   # GET /user_relations.json
   def index
-    @user_relations = UserRelation.all
+    @user_relations = current_user.user_relations
   end
 
   # GET /user_relations/1
@@ -44,7 +44,10 @@ class UserRelationsController < ApplicationController
             @user_relation.add_current_spouse(@self_user.father) # Adding Spouse
           end
         when "Child"
-          @self_user.add_child(@user_relation) # Adding Childrens          
+          @self_user.add_child(@user_relation) # Adding Childrens
+          if @self_user.current_spouse
+            @user_relation.add_mother(@self_user.current_spouse)
+          end
 
       end
 
@@ -60,7 +63,7 @@ class UserRelationsController < ApplicationController
 
     respond_to do |format|
       if @user_relation.save
-        format.html { redirect_to @user_relation, notice: 'User relation was successfully created.' }
+        format.html { redirect_to user_relations_path, notice: 'User relation was successfully created.' }
         format.json { render :show, status: :created, location: @user_relation }
       else
         format.html { render :new }

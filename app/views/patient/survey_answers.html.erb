@@ -1,0 +1,8 @@
+<h2>Survey Report</h2>
+<%= link_to "View Family Tree", patient_family_tree_path(@rapidfire_answer_group.user_id), :class=>"pull-right btn btn-success" %>
+<% @i = 0 %>
+
+<% @rapidfire_answer_group.answers.each do |answer| %>
+	<strong><%= @i = @i + 1 %> ) <%= answer.question.question_text %></strong><br/>
+	<p><%= answer.answer_text %></p>
+<% end %>

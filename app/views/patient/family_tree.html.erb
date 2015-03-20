@@ -11,42 +11,57 @@ The markup will be simple nested lists
 
 <div class="tree">
 	
-	<% @j = 0 %>
-	<% @family_members.each do |family_member| %>
-		<% if @i == 1 %>
-			<% @i = 2 %>
-			<% @j = @j + 1 %>
-			<% next %>
+	<% unless @family_members.blank? %>
+		<% @j = 0 %>
+		<% @i = 0 %>
+		<% @family_members.each do |family_member| %>
+			<% if @i > 0 %>
+				<% @i = @i - 1 %>
+				<% @j = @j + 1 %>
+				<% next %>
+			<% end %>
+			<ul>
+				<li>
+					<a class="<%= family_member.is_male? ? 'rectangle' : 'circle'%>"><%= family_member.name %></a>
+					<% if family_member.current_spouse %>
+						<% @i = @i + 1 %>
+						<li>
+							<a href="#" class="<%= family_member.is_male? ? 'rectangle' : 'circle'%>"><%= family_member.current_spouse.name %></a>
+						<%unless family_member.current_spouse.children %>
+							</li>
+						<% end %>
+					<% end %>
+
+					<% if family_member.siblings %>
+						<% family_member.siblings.each do |fsibling| %>
+							<% @i = @i + 1 %>
+							<li>
+								<a href="#" class="<%= family_member.is_male? ? 'rectangle' : 'circle'%>"><%= fsibling.name %></a>
+							</li>
+						<% end %>
+					<% end %>
 		<% end %>
-		<ul>
-			<li>
-				<a><%= family_member.name %></a>
-				<% if family_member.current_spouse %>
-					<% @i = 1 %>
-					<li>
-						<a href="#"><%= family_member.current_spouse.name %></a>
-					<%unless family_member.current_spouse.children %>
+
+		<% @family_members.each do |family_member| %>
+				<%if family_member.current_spouse %>
+					<%if family_member.current_spouse.father %>
 						</li>
 					<% end %>
 				<% end %>
-	<% end %>
-
-	<% @family_members.each do |family_member| %>
-			<%if family_member.current_spouse %>
-				<%if family_member.current_spouse.father %>
-					</li>
+				<% if @j != 0 %>
+					<% @j = @j - 1 %>
+					<% next	%>				
 				<% end %>
-			<% end %>
-			<% if @j != 0 %>
-				<% @j = @j - 1 %>
-				<% next	%>				
-			<% end %>
-			</li>
-		</ul>
+				</li>
+			</ul>
+		<% end %>
+	<% else %>
+		<p> Did not add Family members yet.</p>
 	<% end %>
-
 </div>
 <br/>
-<div class="col-md-12">
-	<%=link_to "Finish", root_path, :class=>"pull-right btn btn-default" %>
-</div>
+<% if current_user.role == "patient" %>
+	<div class="col-md-12">
+		<%=link_to "Finish", root_path, :class=>"pull-right btn btn-default" %>
+	</div>
+<% end %>

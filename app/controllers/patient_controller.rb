@@ -2,29 +2,35 @@ class PatientController < ApplicationController
   # load_and_authorize_resource
   
   def family_tree
+    if params[:id]
+      @user = User.find(params[:id])
+      @self_member = @user.user_relations.first
+    else
+      @self_member = current_user.user_relations.first
+    end
 
-    @self_member = current_user.user_relations.first
+    unless @self_member.nil?
+      @family_members = @self_member.ancestors.reverse
 
-    @family_members = @self_member.ancestors.reverse
+      # @family_members.reverse_merge!(@self_member.current_spouse)
+      @self_family = Array(@self_member)
 
-    # @family_members.reverse_merge!(@self_member.current_spouse)
-    @self_family = Array(@self_member)
+      if @self_member.current_spouse
+        @self_family.push(@self_member.current_spouse)
+      end    
 
-    if @self_member.current_spouse
-      @self_family.push(@self_member.current_spouse)
-    end    
+      @descendants = @self_member.descendants
 
-    @descendants = @self_member.descendants
+      @family_members = @family_members + @self_family
 
-    @family_members = @family_members + @self_family
-
-    @family_members = @family_members + @descendants
-
+      @family_members = @family_members + @descendants
+    end
   end
 
   # Listing all patients under clinic
   def index
   	@patients = current_user.patients
+
   end
 
   # Initiating New Patient
@@ -81,6 +87,10 @@ class PatientController < ApplicationController
       format.html { redirect_to patient_index_path, notice: 'Patient was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def survey_answers
+    @rapidfire_answer_group = Rapidfire::AnswerGroup.find(params[:id])
   end
 
   private

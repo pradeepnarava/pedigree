@@ -27,9 +27,11 @@
         <li><a href="/rapidfire">Home</a></li>
         <% if can? :create, User %>
           <li><a href="/patient/">Patients</a></li>
-        <% end %>
-        <li><a href="/patient/family_tree">Family Tree</a></li>
-        <li><a href="/pages/send_questionaire">Send Questionaire</a></li>
+          <li><a href="/pages/send_questionaire">Send Questionaire</a></li>
+        <% else %>
+          <li><a href="/patient/family_tree">Family Tree</a></li>
+          <li><a href="/user_relations/">Family Members</a></li>
+        <% end %>        
       </ul>
 
       <a href="/users/sign_out" class="pull-right">Sign out</a>

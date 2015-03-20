@@ -4,6 +4,8 @@
   <tr>
     <th> Email Address </th>
     <th></th>
+    <th></th>
+    <th>Reports</th>
   </tr>
   <% @patients.each do |patient| %>
     <tr>
@@ -15,6 +17,9 @@
       </td>
       <td>
         <%= link_to 'Destroy',patient_destroy_path(patient.id), data: { confirm: 'Are you sure?' } %>
+      </td>
+      <td>
+        <%= link_to patient.rapidfire_answer_groups.first.question_group.name, patient_survey_answers_path(patient.rapidfire_answer_groups.first), :class=>"btn btn-success" %>
       </td>
     </tr>
   <% end %>

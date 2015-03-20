@@ -67,7 +67,7 @@ right connector from last child*/
 	width: 0; height: 20px;
 }
 
-.tree li a{
+.tree li .rectangle{
 	border: 1px solid #ccc;
 	padding: 5px 10px;
 	text-decoration: none;
@@ -87,13 +87,26 @@ right connector from last child*/
 
 /*Time for some hover effects*/
 /*We will apply the hover effect the the lineage of the element also*/
-.tree li a:hover, .tree li a:hover+ul li a {
+.tree li .rectangle:hover, .tree li .rectangle:hover+ul li .rectangle {
 	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
 }
 /*Connector styles on hover*/
-.tree li a:hover+ul li::after, 
-.tree li a:hover+ul li::before, 
-.tree li a:hover+ul::before, 
-.tree li a:hover+ul ul::before{
+.tree li .rectangle:hover+ul li::after, 
+.tree li .rectangle:hover+ul li::before, 
+.tree li .rectangle:hover+ul::before, 
+.tree li .rectangle:hover+ul ul::before{
 	border-color:  #94a0b4;
+}
+
+.circle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+	width: 15px;
+	height: 16px;
+	padding: 8px;
+	background: #fff;
+	border: 1px solid #838383;
+	color: #838383;
+	text-align: center;
 }

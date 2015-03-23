@@ -14,6 +14,7 @@ class UserRelationsController < ApplicationController
 
   # GET /user_relations/new
   def new
+    
     @family_members = current_user.user_relations
     @user_relation = UserRelation.new
   end

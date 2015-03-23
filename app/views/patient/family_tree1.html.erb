@@ -1,0 +1,67 @@
+<!--
+We will create a family tree using just CSS(3)
+The markup will be simple nested lists
+-->
+
+<% content_for :header do -%>
+  <%= stylesheet_link_tag 'family_tree', media: 'all', 'data-turbolinks-track' => true %>
+<% end -%>
+
+<!-- Dynamic Family tree end -->
+
+<div class="tree">
+	
+	<% unless @family_members.blank? %>
+		<% @j = 0 %>
+		<% @i = 0 %>
+		<% @family_members.each do |family_member| %>
+			<% if @i > 0 %>
+				<% @i = @i - 1 %>
+				<% @j = @j + 1 %>
+				<% next %>
+			<% end %>
+			<ul>
+				<li>
+					<a class=<%= family_member.is_male? ? 'rectangle' : 'circle' %>><%= family_member.name %></a>
+					<% if family_member.current_spouse %>
+						<% @i = @i + 1 %>
+						<li>
+							<a href="#" class=<%= family_member.current_spouse.is_male? ? 'rectangle' : 'circle' %>><%= family_member.current_spouse.name %></a>
+						<%unless family_member.current_spouse.children %>
+							</li>
+						<% end %>
+					<% end %>
+
+					<% if family_member.siblings %>
+						<% family_member.siblings.each do |fsibling| %>
+							<% @i = @i + 1 %>
+							<li>
+								<a href="#" class=<%= fsibling.is_male? ? 'rectangle' : 'circle' %>><%= fsibling.name %></a>
+							</li>
+						<% end %>
+					<% end %>
+		<% end %>
+
+		<% @family_members.each do |family_member| %>
+				<%if family_member.current_spouse %>
+					<%if family_member.current_spouse.father %>
+						</li>
+					<% end %>
+				<% end %>
+				<% if @j != 0 %>
+					<% @j = @j - 1 %>
+					<% next	%>				
+				<% end %>
+				</li>
+			</ul>
+		<% end %>
+	<% else %>
+		<p> Did not add Family members yet.</p>
+	<% end %>
+</div>
+<br/>
+<% if current_user.role == "patient" %>
+	<div class="col-md-12">
+		<%=link_to "Finish", root_path, :class=>"pull-right btn btn-default" %>
+	</div>
+<% end %>

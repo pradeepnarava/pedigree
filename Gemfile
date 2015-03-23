@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use mysql2 as the database for Active Record
-# gem 'mysql2'
-gem 'pg'
+gem 'mysql2'
+#gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -63,7 +63,7 @@ gem 'activemerchant'
 gem 'wicked_pdf'
 
 # Dependant gem for wiked_pdf
-gem 'wkhtmltopdf-binary'
+#gem 'wkhtmltopdf-binary'
 
 # For generating Family Tree
 gem 'genealogy', '~> 1.5.0'

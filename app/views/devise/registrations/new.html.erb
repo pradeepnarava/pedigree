@@ -1,31 +1,49 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<div class="container">
+  <div class="modal-header">
+    <h3>Family Pedigree</h3>
   </div>
+  <div class="well">
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <ul class="nav nav-tabs">
+      <li><%= link_to "Log in", new_session_path(resource_name) %></li>
+      <li class="active"><%= link_to "Sign up", memberships_path %></li>
+      <li><%= link_to "Forgot your password?", new_password_path(resource_name) %></li>
+    </ul>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),:html => {:class =>"form-horizontal"}) do |f| %>
+      <%= devise_error_messages! %>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+           <%= f.email_field :email, autofocus: true ,:class=>"form-control", :id=>"inputEmail3", :placeholder=>"Email"%>
+          </div>
+        </div>
+
+        <div class="form-group">     
+          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10"> 
+       
+            <%= f.password_field :password, autocomplete: "off" ,:class=>"form-control", :id=>"inputPassword3", :placeholder=>"Password"%>
+             <% if @validatable %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label" style="white-space: nowrap;">Confirm Password</label>
+          <div class="col-sm-10">   
+            <%= f.password_field :password_confirmation, autocomplete: "off" ,:class=>"form-control", :id=>"inputPassword3", :placeholder=>"Confirm Password"%>
+          </div>
+        </div>
+
+      <%= f.hidden_field :membership_id, :value=>params['id'] %>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= f.submit "Sign up",:class=>"btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <%= f.hidden_field :membership_id, :value=>params['id'] %>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

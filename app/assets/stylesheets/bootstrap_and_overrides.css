@@ -5,3 +5,196 @@
   To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
   =require twitter-bootstrap-static/fontawesome
   */
+  body {
+	background-color: #09091a;
+	color: #fff;
+}
+
+.container label, .well,.panel {
+	color: #333;
+}
+
+.modal-header {
+	color: #fff;
+}
+
+.btn-primary {
+	background-color: #1fbad6;
+	border: 1px solid #1fbad6;
+}
+
+.btn-primary:hover {
+  background-color: #44cbe4;
+  border: 1px solid #44cbe4;
+}
+
+.container-bg {
+	background-color: #fff;
+	border-radius: 6px;
+	min-height: 500px;
+	padding: 20px;
+}
+
+.push-heading {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+	.collapse-heading {
+		display: none;
+	}
+	
+	.push-heading {
+		display: block;
+		padding-top: 10px;
+	}
+}
+
+/* -------------------------------------------------------------- */
+/* Login Register
+/* -------------------------------------------------------------- */
+
+.modal-header {
+	margin-bottom: 50px;
+}
+
+.well {
+	margin: 100px auto 0;
+	max-width: 800px;
+}
+
+.nav-tabs {
+	margin-bottom: 20px;
+}
+
+label {
+	font-weight: normal;
+}
+
+@media screen and (max-width: 520px) {
+	.nav-tabs {
+		border-bottom: 0;
+	}
+	
+	.nav-tabs > li {
+		border: 1px solid #ddd;
+		border-bottom: 0;
+		float: none;
+		margin-bottom: 0;
+	}
+	
+	.nav-tabs > li:last-child {
+		border-bottom: 1px solid #ddd;
+	}
+	
+	.nav-tabs > li > a {	 
+	  margin-right: 0;
+	}
+	
+	.nav-tabs > li.active > a, 
+	.nav-tabs > li.active > a:hover, 
+	.nav-tabs > li.active > a:focus {
+		border: 0;
+	}
+}
+
+/* -------------------------------------------------------------- */
+/* Pricing
+/* -------------------------------------------------------------- */
+
+.panel.price > .panel-heading {
+  box-shadow: 0 5px 0 rgba(50, 50, 50, 0.2) inset;
+  text-shadow: 0 3px 0 rgba(50, 50, 50, 0.6);
+}
+
+.price .panel-footer {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-bottom: 0 none;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.panel.price, .panel.price > .panel-heading {
+  border-radius: 0;
+  transition: all 0.3s ease 0s;
+}
+
+.panel.price:hover > .panel-heading {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2) inset;
+}
+
+.panel.price:hover {
+  box-shadow: 0 0 30px rgba(185, 185, 202, 0.2);
+}
+
+/* ------------ Red ------------ */
+
+.price.panel-red > .panel-heading {
+  background-color: #d04e50;
+  border-bottom: 1px solid #ff6062;
+  border-color: #ff6062;
+  color: #fff;
+}
+
+.price.panel-red > .panel-body {
+  background-color: #ef5a5c;
+  color: #fff;
+}
+
+.price.panel-red > .panel-body .lead {
+  text-shadow: 0 3px 0 rgba(50, 50, 50, 0.3);
+}
+
+/* ------------ Blue ------------ */
+
+.price.panel-blue > .panel-heading {
+  background-color: #608bb4;
+  border-bottom: 1px solid #78aee1;
+  border-color: #78aee1;
+  color: #fff;
+}
+
+.price.panel-blue > .panel-body {
+  background-color: #73a3d4;
+  color: #fff;
+}
+
+.price.panel-blue > .panel-body .lead {
+  text-shadow: 0 3px 0 rgba(50, 50, 50, 0.3);
+}
+
+/* ------------ Green ------------ */
+
+.price.panel-green > .panel-heading {
+  background-color: #57ac57;
+  border-bottom: 1px solid #71df71;
+  border-color: #71df71;
+  color: #fff;
+}
+
+.price.panel-green > .panel-body {
+  background-color: #65c965;
+  color: #fff;
+}
+
+.price.panel-green > .panel-body .lead {
+  text-shadow: 0 3px 0 rgba(50, 50, 50, 0.3);
+}
+
+/* ------------ Gray ------------ */
+
+.price.panel-grey > .panel-heading {
+  background-color: #6d6d6d;
+  border-bottom: 1px solid #b7b7b7;
+  border-color: #b7b7b7;
+  color: #fff;
+}
+
+.price.panel-grey > .panel-body {
+  background-color: #808080;
+  color: #fff;
+}
+
+.price.panel-grey > .panel-body .lead {
+  text-shadow: 0 3px 0 rgba(50, 50, 50, 0.3);
+}

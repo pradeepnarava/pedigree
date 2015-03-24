@@ -1,9 +1,4 @@
 <%= form_tag('/pages/email_questionaire') do %>
-	<div class="field">
-		Questionaire URL : <%= url_field_tag :questionaire_url, nil, required: true %>
-	</div>
-	<div class="field">
-		Patient E-Mail id's ( Comma Seperated ) : <%= text_area_tag :patient_emails, nil, required: true %>
-	</div>	
+	Questionaire URL : <%= text_field_tag :questionaire_url %>
 	<%= submit_tag "Send to All Patients" %>
 <% end %>

@@ -92,17 +92,6 @@ class PatientController < ApplicationController
     @rapidfire_answer_group = Rapidfire::AnswerGroup.find(params[:id])
   end
 
-  def patient_survey
-    @user = User.find_by_email(params[:email])
-    if @user.nil?
-      @user = User.create(:email=>params[:email], :password=>"atoz1234", :role=>"patient", :user_id=>params[:cid] )
-    end
-
-    sign_in(:user, @user)
-
-    redirect_to "#{request.base_url}/rapidfire/question_groups/#{params[:qid]}/answer_groups/new"
-  end
-
   private
 
     def patient_params

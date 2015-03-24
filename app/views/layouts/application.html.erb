@@ -24,8 +24,7 @@
   <body class="container">
     
     <% if current_user %>
-    
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-pills">
         <li><a href="/rapidfire">Home</a></li>
         <% if can? :create, User %>
           <li><a href="/patient/">Patients</a></li>

@@ -1,11 +1,12 @@
 <h2>Please answer these Questions</h2>
 <hr/>
-
-<%= form_for([@question_group, @answer_group_builder]) do |f| %>
-	<%- @answer_group_builder.answers.each do |answer| %>
-    	<%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
-      		<%= render_answer_form_helper(answer, answer_form) %><br/>
-    	<% end %>
-  	<% end %>
-  	<%= f.submit "Save and Next" %>
+<%= form_for([@question_group, @answer_group_builder], :html => {:class => 'col-md-12 col-xs-12 col-sm-12 '}) do |f| %>
+	<div class="well">
+		<%- @answer_group_builder.answers.each do |answer| %>
+	    	<%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+	      		<%= render_answer_form_helper(answer, answer_form) %><br/>
+	    	<% end %>
+	  	<% end %>
+	  	<%= f.submit "Save and Next" ,:class=>"btn btn-default"%>
+  	</div>
 <% end %>

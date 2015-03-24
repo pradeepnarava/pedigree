@@ -1,9 +1,12 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
-<%= f.label :answer_text, answer.question.question_text %><br/>
-<%- answer.question.options.each do |option| %>
-  <%= f.label "answer_text_#{option}", option do %>
-    <%= f.radio_button :answer_text, option %>
-    <%= option %>
-  <% end %>
+<div class="form-group">
+	<%= f.label :answer_text, answer.question.question_text ,:class=>"col-md-2 col-sm-3 col-xs-12"%>
+	<div class="col-md-10 col-sm-9 col-xs-12">
+		<%- answer.question.options.each do |option| %>
+		<div class="col-md-3 col-sm-4 col-xs-6">
+			<%= f.label "answer_text_#{option}",:class=>"form-control" ,option do %>
+		    	<%= f.radio_button :answer_text, option %>
+		    	<%= option %>
+  			<% end %>
+  		</div>
 <% end %>

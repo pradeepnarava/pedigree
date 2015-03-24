@@ -22,8 +22,10 @@
     <%= csrf_meta_tags %>
   </head>
   <body class="container">
+    
     <% if current_user %>
-      <ul class="nav nav-pills">
+    
+      <ul class="nav nav-tabs">
         <li><a href="/rapidfire">Home</a></li>
         <% if can? :create, User %>
           <li><a href="/patient/">Patients</a></li>
@@ -33,16 +35,16 @@
           <li><a href="/user_relations/">Family Members</a></li>
         <% end %>        
       </ul>
-
-      <a href="/users/sign_out" class="pull-right">Sign out</a>
+      <a href="/users/sign_out" class="pull-right btn btn-default"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a>
 	  <% end %>
-    <% unless flash[:notice].blank? %>
-      <%= flash[:notice] %>
-    <% end %>
-    <% unless flash[:notice].blank? %>
-      <%= flash[:error] %>
-    <%end %>
-    
-	  <%= yield %>
+    <div class="container">
+      <% unless flash[:notice].blank? %>
+        <%= flash[:notice] %>
+      <% end %>
+      <% unless flash[:notice].blank? %>
+        <%= flash[:error] %>
+      <%end %>      
+  	  <%= yield %>
+    </div>
   </body>
 </html>

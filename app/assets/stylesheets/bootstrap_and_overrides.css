@@ -10,7 +10,7 @@
 	color: #fff;
 }
 
-.container label, .well,.panel {
+.well,.panel {
 	color: #333;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .well {
-	margin: 100px auto 0;
+	margin: 40px auto 0;
 	max-width: 800px;
 }
 
@@ -198,8 +198,14 @@ label {
 .price.panel-grey > .panel-body .lead {
   text-shadow: 0 3px 0 rgba(50, 50, 50, 0.3);
 }
+<<<<<<< HEAD
 
 
 form input,textarea {
 	color: black;
+=======
+.form-group {
+  padding-top: 5px;
+  clear: both;
+>>>>>>> 450818eebe31ee22d630bf89d496c34a474895e1
 }

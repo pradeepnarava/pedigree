@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: e3a7354c0196743e2462bdc27c591e8285d110b0
+  revision: 53e85d6a2cf4f5bc083e8da7c6786b5cd69ce7a1
   specs:
     activeadmin (1.0.0.pre1)
       arbre (~> 1.0, >= 1.0.2)
@@ -93,7 +93,7 @@ GEM
       has_scope (~> 0.6.0.rc)
       railties (>= 3.2, < 5)
       responders
-    jbuilder (2.2.11)
+    jbuilder (2.2.12)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -136,7 +136,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    ransack (1.6.3)
+    ransack (1.6.4)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
@@ -146,6 +146,7 @@ GEM
       active_model_serializers (~> 0.8.1)
       rails (>= 3.2.13)
     rdoc (4.2.0)
+      json (~> 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     sass (3.2.19)

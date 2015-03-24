@@ -21,18 +21,18 @@
   </div>
 
   <% unless @family_members.blank? %>
-    <div class="field">
+    <div class="form-group">
       What relative do you want to add to yourself?<br>
-      <%= select_tag "what_relative", options_for_select(["Father", "Mother", "Child" ]) %>
+      <%= select_tag "what_relative", options_for_select(["Father", "Mother", "Paternal Grand Father", "Paternal Grand Mother", "Maternal Grand Father", "Maternal Grand Mother", "Child", "Spouse", "Sibling" ]) %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
+  <div class="form-group">
+    name<br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :sex %><br>
+  <div class="form-group">
+    Sex<br>
     <%= f.select(:sex,options_for_select([["Male", "M"], ["Female", "F"]]))  %>
     <%#= f.select(:sex,options_for_select(["Male","Female"]))  %>
   </div>
@@ -40,4 +40,25 @@
   <div class="actions">
     <%= f.submit "Create Family Member" %>
   </div>
+<% end %>
+
+<style type="text/css">
+  form#new_user_relation {
+    color: rgb(78, 103, 182);
+  }
+</style>
+
+<% unless @family_members.blank? %>
+  <script type="text/javascript">
+    $('#to_family_member').change(function(){
+      var family_member = $('#to_family_member option:selected').text();
+      if (family_member == "<%=@family_members.first.name %>") {
+        var select = $('#what_relative');
+        select.empty().append('<option>Father</option><option>Mother</option><option>Paternal Grand Father</option><option>Paternal Grand Mother</option><option>Maternal Grand Father</option><option>Maternal Grand Mother</option><option>Child</option><option>Spouse</option><option>Sibling</option>');
+      }else{
+        var select = $('#what_relative');
+        select.empty().append('<option>Child</option><option>Spouse</option><option>Sibling</option>');
+      };
+    });
+  </script>
 <% end %>

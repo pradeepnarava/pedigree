@@ -11,30 +11,20 @@ class PatientController < ApplicationController
 
     unless @self_member.nil?
       @family_members = @self_member.ancestors.reverse
-      @four_family_members = @family_members.first(4)
-      p "................."
-      p "................."
-      p @four_family_members
-      p "................."
-      p "................."
+
+      # @family_members.reverse_merge!(@self_member.current_spouse)
+      @self_family = Array(@self_member)
+
+      if @self_member.current_spouse
+        @self_family.push(@self_member.current_spouse)
+      end    
+
+      @descendants = @self_member.descendants
+
+      @family_members = @family_members + @self_family
+
+      @family_members = @family_members + @descendants
     end
-
-    # unless @self_member.nil?
-    #   @family_members = @self_member.ancestors.reverse
-
-    #   # @family_members.reverse_merge!(@self_member.current_spouse)
-    #   @self_family = Array(@self_member)
-
-    #   if @self_member.current_spouse
-    #     @self_family.push(@self_member.current_spouse)
-    #   end    
-
-    #   @descendants = @self_member.descendants
-
-    #   @family_members = @family_members + @self_family
-
-    #   @family_members = @family_members + @descendants
-    # end
   end
 
   # Listing all patients under clinic

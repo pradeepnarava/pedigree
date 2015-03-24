@@ -1,0 +1,66 @@
+<%= form_for(@user_relation, :html => {:class => 'col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 '}) do |f| %>
+  <div class="well">
+    <% if @user_relation.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user_relation.errors.count, "error") %> prohibited this user_relation from being saved:</h2>
+
+        <ul>
+        <% @user_relation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field form-group">
+      To Which family member do you want to add a relative?
+      <% if @family_members.blank? %>
+        <%= select_tag "to_family_member", options_for_select([ "Self" ]) ,:class=>"form-control"%><br>
+      <% else %>
+        <%= select_tag "to_family_member", options_from_collection_for_select(@family_members, "id", "name"),:class=>"form-control" %><br>
+      <% end %>
+    </div>
+
+    <% unless @family_members.blank? %>
+      <div class="form-group">
+        What relative do you want to add to yourself?<br>
+        <%= select_tag "what_relative", options_for_select(["Father", "Mother", "Paternal Grand Father", "Paternal Grand Mother", "Maternal Grand Father", "Maternal Grand Mother", "Child", "Spouse", "Sibling" ]) %>
+      </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name ,:class=>"form-control",:placeholder=>"Name"%><br>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :sex %>
+      <%= f.select(:sex ,options_for_select([["Male", "M"], ["Female", "F"]]), {},{ :class => 'form-control' } ) 
+       %><br>
+      <%#= f.select(:sex,options_for_select(["Male","Female"]))  %>
+    </div>
+    <%= f.hidden_field :user_id, :value=>current_user.id %>
+    <div class="actions form-group">
+      <%= f.submit "Create Family Member" ,:class=>"btn btn-default"%>
+    </div>
+<% end %>
+<style type="text/css">
+  form#new_user_relation {
+    color: rgb(78, 103, 182);
+  }
+</style>
+
+<% unless @family_members.blank? %>
+  <script type="text/javascript">
+    $('#to_family_member').change(function(){
+      var family_member = $('#to_family_member option:selected').text();
+      if (family_member == "<%=@family_members.first.name %>") {
+        var select = $('#what_relative');
+        select.empty().append('<option>Father</option><option>Mother</option><option>Paternal Grand Father</option><option>Paternal Grand Mother</option><option>Maternal Grand Father</option><option>Maternal Grand Mother</option><option>Child</option><option>Spouse</option><option>Sibling</option>');
+      }else{
+        var select = $('#what_relative');
+        select.empty().append('<option>Child</option><option>Spouse</option><option>Sibling</option>');
+      };
+    });
+  </script>
+<% end %>

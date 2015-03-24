@@ -198,3 +198,8 @@ label {
 .price.panel-grey > .panel-body .lead {
   text-shadow: 0 3px 0 rgba(50, 50, 50, 0.3);
 }
+
+
+form input,textarea {
+	color: black;
+}

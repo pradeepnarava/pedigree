@@ -1,12 +1,8 @@
 class QuestionaireMailer < ActionMailer::Base
   default from: "pradeep.brilliancetech@gmail.com"
 
-  def mail_questionaire_to_patients(questionaire_url, current_user)
+  def mail_questionaire_to_patients(questionaire_url, patient_email)
   	@questionaire_url = questionaire_url
-  	@patients = current_user.patients
-
-  	@patients.each do |patient|
-  		mail(to: patient.email, subject: 'Questionaire From #{current_user.email}')
-  	end
+  	mail(to: patient_email, subject: 'Questionaire From #{current_user.email}')
   end
 end

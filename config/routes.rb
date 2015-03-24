@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'patient/family_tree/:id(.:format)' => 'patient#family_tree' , :as => 'patient_family_tree'
   get 'patient/survey_answers' => 'patient#survey_answers', :as => 'patient_survey_answerss'
   get 'patient/survey_answers/:id(.:format)' => 'patient#survey_answers', :as => 'patient_survey_answers'
+  get 'patient/patient_survey'
 
   resources :patient
   resources :payments

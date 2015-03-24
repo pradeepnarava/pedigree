@@ -10,25 +10,17 @@ The markup will be simple nested lists
 <!-- Dynamic Family tree end -->
 
 <div class="tree">
-	<ul>
+	
 	<% unless @family_members.blank? %>
 		<% @j = 0 %>
 		<% @i = 0 %>
-		<% @ff = 0 %>
-		<% @previous_member = @family_members.first %>
-		<% for c in 0 ... @family_members.size %>
-			<% family_member = @family_members[c] %>
-			<% cn = c +1 %>
-			<% family_next_member = @family_members[cn] %>
+		<% @family_members.each do |family_member| %>
 			<% if @i > 0 %>
 				<% @i = @i - 1 %>
 				<% @j = @j + 1 %>
 				<% next %>
 			<% end %>
-			<% if @previous_member.children.include?(family_next_member) || @previous_member.children.include?(family_member) || !family_member.father.nil? || !family_member.mother.nil? %>
-				<ul>
-			<% end %>
-				<% @previous_member = family_member %>
+			<ul>
 				<li>
 					<a class=<%= family_member.is_male? ? 'rectangle' : 'circle' %>><%= family_member.name %></a>
 					<% if family_member.current_spouse %>

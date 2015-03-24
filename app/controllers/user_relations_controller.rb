@@ -43,12 +43,52 @@ class UserRelationsController < ApplicationController
           unless @self_user.father.nil?
             @user_relation.add_current_spouse(@self_user.father) # Adding Spouse
           end
+        when "Paternal Grand Father"
+          @self_user.add_paternal_grandfather(@user_relation)
+
+          unless @self_user.paternal_grandmother.nil?
+            @user_relation.add_current_spouse(@self_user.paternal_grandmother) # Adding Spouse
+          end
+        when "Paternal Grand Mother"
+          @self_user.add_paternal_grandmother(@user_relation)
+
+          unless @self_user.paternal_grandfather.nil?
+            @user_relation.add_current_spouse(@self_user.paternal_grandfather) # Adding Spouse
+          end
+        when "Maternal Grand Father"
+          @self_user.add_maternal_grandfather(@user_relation)
+          unless @self_user.maternal_grandmother.nil?
+            @user_relation.add_current_spouse(@self_user.maternal_grandmother) # Adding Spouse
+          end
+        when "Maternal Grand Mother"
+          @self_user.add_maternal_grandmother(@user_relation)
+          unless @self_user.maternal_grandfather.nil?
+            @user_relation.add_current_spouse(@self_user.maternal_grandfather) # Adding Spouse
+          end
+        when "Spouse"
+          @self_user.add_current_spouse(@user_relation)
+          unless @self_user.children.blank?
+            @self_user.children.each do |children|
+              children.add_mother(@user_relation)
+            end
+          end
+        when "Sibling"
+          unless @self_user.father.nil?
+            @self_user.add_siblings(@user_relation, half: :father)
+            unless @self_user.mother.nil?
+              @user_relation.add_mother(@self_user.mother)
+            end            
+          else
+            @self_user.add_siblings(@user_relation, half: :mother)
+            unless @self_user.father.nil?
+              @user_relation.add_father(@self_user.father)
+            end
+          end
         when "Child"
           @self_user.add_child(@user_relation) # Adding Childrens
           if @self_user.current_spouse
             @user_relation.add_mother(@self_user.current_spouse)
           end
-
       end
 
       # @self_user.add_siblings(@user_relation, half: :father) # Adding Paternal Siblings

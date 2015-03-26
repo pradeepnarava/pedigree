@@ -5,6 +5,8 @@ class UserRelationsController < ApplicationController
   # GET /user_relations.json
   def index
     @user_relations = current_user.user_relations
+    @family_members = current_user.user_relations
+    @user_relation = UserRelation.new
   end
 
   # GET /user_relations/1
@@ -114,7 +116,7 @@ class UserRelationsController < ApplicationController
     @family_members = current_user.user_relations
     flash[:notice] = "The internal broke. Error : #{e}"
     respond_to do |format|
-      format.html { redirect_to new_user_relation_path }
+      format.html { redirect_to user_relations_path }
     end
   end
 
